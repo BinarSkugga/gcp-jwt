@@ -1,0 +1,8 @@
+{
+  "name": "gcp-jwt",
+  "version": "0.1",
+  "author": "Charles Smith",
+  "email": "binarskugga@gmail.com",
+  "description": "Generate, Sign and verify JWTs using GCP KMS.",
+  "license": "GNU GPLv3"
+}
