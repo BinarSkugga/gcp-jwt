@@ -1,3 +1,6 @@
 dist/
 build/
 *.egg-info/
+
+resources/*.json
+!resources/setup.json
