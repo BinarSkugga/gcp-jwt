@@ -14,6 +14,13 @@ of the token.
 * [ ] Symmetrically Encrypted Layer
 * [ ] Pretty API
 
+### GCP Roles Needed
+To be able to use this library you'll need a GCP service account with at
+least the following roles:
+* cloudkms.cryptoKeyVersions.list
+* cloudkms.cryptoKeyVersions.useToSign
+* cloudkms.cryptoKeyVersions.viewPublicKey
+
 ### Install
 **Using PIP :**
 ``pip install gcp-jwt``
