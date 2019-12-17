@@ -27,7 +27,7 @@ across a case where a company didn't want Google to manage the
 authentication process. Whether or not this should be used in production
 is outside the scope of this project.
 
-## Simple Usage
+### Simple Usage
 ```python
 from google.cloud import kms
 
