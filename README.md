@@ -10,6 +10,8 @@ of the token.
 ---
 * [ ] Auto Rotating Asymmetric Key
 * [ ] Batch Token Generation
+* [ ] Compression Option
+* [ ] Symmetrically Encrypted Layer
 * [ ] Pretty API
 
 ### Install
