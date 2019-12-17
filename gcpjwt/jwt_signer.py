@@ -77,13 +77,16 @@ class JWTSigner:
             latest = sorted(enabled_keys, key=lambda e: e.create_time.seconds, reverse=True)[0]
             return self._verify_task(latest, payload, signature, hash)
         else:
-            type = None
             if self._concurrent:
                 futures = [self._thread_pool.submit(self._verify_task, k, payload, signature, hash) for k in enabled_keys]
                 concurrent.futures.wait(futures)
                 concurrent_result = map(lambda x: x.result(), futures)
-                return next(r for r in concurrent_result if r[1])
+                if any([r[1] for r in concurrent_result]):
+                    return next(r for r in concurrent_result if r[1])
+                else:
+                    return None, False
             else:
+                type = None
                 for key in enabled_keys:
                     public_key, digest, type = self._get_key_info(key, payload, hash)
 
