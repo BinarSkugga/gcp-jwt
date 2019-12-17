@@ -22,10 +22,10 @@ least the following roles:
 * cloudkms.cryptoKeyVersions.viewPublicKey
 
 ### Why not using GCP integrated auth ?
-Some projects necessitate more flexibility, I've also personally came
+Some projects require more flexibility, I've also personally came
 across a case where a company didn't want Google to manage the
 authentication process. Whether or not this should be used in production
-is outside of the scope of this project.
+is outside the scope of this project.
 
 ### Install
 **Using PIP :**
