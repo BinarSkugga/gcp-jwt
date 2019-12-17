@@ -21,6 +21,12 @@ least the following roles:
 * cloudkms.cryptoKeyVersions.useToSign
 * cloudkms.cryptoKeyVersions.viewPublicKey
 
+### Why not using GCP integrated auth ?
+Some project necessitate more flexibility, I've also personally came
+across a case where a company didn't want Google to manage the
+authentication process. Whether or not this should be used in production
+is outside of the scope of this project.
+
 ### Install
 **Using PIP :**
 ``pip install gcp-jwt``
