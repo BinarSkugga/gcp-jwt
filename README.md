@@ -7,11 +7,11 @@ of the token.
 * [x] Token Signage
 * [x] Signature Verification
 * [x] Expiry Verification
-
-
+---
 * [ ] Auto Rotating Asymmetric Key
 * [ ] Batch Token Generation
 * [ ] Pretty API
 
 ### Install
+**Using PIP :**
 ``pip install gcp-jwt``
