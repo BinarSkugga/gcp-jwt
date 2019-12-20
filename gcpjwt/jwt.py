@@ -1,9 +1,16 @@
 import base64
 import datetime
 import json
+from enum import IntEnum
 from math import floor
 
 from gcpjwt.jwt_signer import JWTSigner
+
+
+class VerifyResult(IntEnum):
+    VALID = 0,
+    INVALID = 1,
+    EXPIRED = 2
 
 
 class JWT:
@@ -20,6 +27,7 @@ class JWT:
         self._iat = None
         self._nbf = None
         self._jti = None
+        self.exp = (60 * 60 * 2)
 
         self._custom_claims = {}
 
@@ -41,7 +49,7 @@ class JWT:
 
     @exp.setter
     def exp(self, value: int):
-        self._exp = value
+        self._exp = self.utc_now() + value
 
     @property
     def sub(self):
@@ -102,9 +110,6 @@ class JWT:
 
         if self.exp is not None:
             payload['exp'] = self.exp
-        else:
-            payload['exp'] = payload['iat'] + (60 * 60 * 2)
-
         if self.sub is not None:
             payload['sub'] = self.sub
         if self.aud is not None:
@@ -146,10 +151,10 @@ class JWT:
 
         dict_payload = json.loads(payload)
         if 'exp' in dict_payload and dict_payload['exp'] <= self.utc_now():
-            return 1
+            return VerifyResult.EXPIRED
 
         valid = self._signer.verify(self._ring, self._key, payload, signature, force_latest, self._hash)[1]
         if not valid:
-            return 2
+            return VerifyResult.INVALID
 
-        return 0
+        return VerifyResult.VALID

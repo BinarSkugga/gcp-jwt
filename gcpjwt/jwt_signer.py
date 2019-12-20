@@ -16,7 +16,6 @@ class JWTSigner:
         self.client = client
         self.project = project
         self.location = location
-        self._concurrent = False
         self._thread_pool = None
 
         self._hash_map = {
@@ -32,7 +31,6 @@ class JWTSigner:
         }
 
     def concurrent(self, value: bool = True):
-        self._concurrent = value
         if value:
             self._thread_pool = concurrent.futures.ThreadPoolExecutor()
 
@@ -77,7 +75,7 @@ class JWTSigner:
             latest = sorted(enabled_keys, key=lambda e: e.create_time.seconds, reverse=True)[0]
             return self._verify_task(latest, payload, signature, hash)
         else:
-            if self._concurrent:
+            if self._thread_pool is not None:
                 futures = [self._thread_pool.submit(self._verify_task, k, payload, signature, hash) for k in enabled_keys]
                 concurrent.futures.wait(futures)
                 concurrent_result = map(lambda x: x.result(), futures)
